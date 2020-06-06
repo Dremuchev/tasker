@@ -46,30 +46,29 @@ export const HeaderTabs = withRouter(({ history, location, tabs }: RouteComponen
     };
 
     return (
-        <AppBar className={styles.customTabsBar} color="default" elevation={3}>
+        <AppBar className={styles.customTabsBar} color="default" elevation={0} position="absolute">
             <Toolbar className={styles.toolbar}>
                 <SvgIcon><BuildRounded className={styles.logoIcon} /></SvgIcon>
-                <LogoTextWrapper>
-                    <Typography variant="h6" align="center">
+                    <TypographyWrapper variant="h6" href="/">
                         Opel-Center
-                    </Typography>
+                    </TypographyWrapper>
                     <TypographyWrapper variant="subtitle2" component="a" href="tel: +74952564787">
                         +7 (495) 256-47-87
                     </TypographyWrapper>
                     <TypographyWrapper variant="subtitle2" component="a" href="tel: +79151229306">
                         +7 (915) 122-93-06
                     </TypographyWrapper>
-                </LogoTextWrapper>
-                <CustomTabs
-                    onChange={handleChange}
-                    value={value}
-                    aria-label="tabs"
-                    indicatorColor="secondary"
-                    action={updateIndicator}
-                >
-                    {tabs && tabs.map(renderTabs)}
-                </CustomTabs>
             </Toolbar>
+            <CustomTabs
+                onChange={handleChange}
+                value={value}
+                aria-label="tabs"
+                indicatorColor="secondary"
+                action={updateIndicator}
+                centered
+            >
+                {tabs && tabs.map(renderTabs)}
+            </CustomTabs>
         </AppBar>
     );
 });

@@ -10,11 +10,11 @@ import { CustomTabProps, CustomTabsProps } from './header-tabs.types';
 export const useTabsStyles = makeStyles(theme => ({
     customTabsBar: {
         top: INFO_HEADER_HEIGHT,
-        backgroundColor: PrimaryColors[50],
+        backgroundColor: 'transparent',
     },
     toolbar: {
         '&&': {
-            minHeight: INFO_HEADER_HEIGHT,
+            minHeight: HEADER_TABS_HEIGHT,
         },
     },
     logoText: {
@@ -69,4 +69,5 @@ export const LogoTextWrapper = styled.div`
 export const TypographyWrapper = styled<any>(Typography)`
     color: ${Orange[600]};
     text-decoration: none;
+    padding-left: 12px;
 `;
