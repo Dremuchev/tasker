@@ -33,6 +33,7 @@ export const CustomTabs = withStyles((theme: Theme) =>
     createStyles({
         root: {
             minHeight: HEADER_TABS_HEIGHT,
+            width: 'calc(100vw - 17px)',
         },
         indicator: {
             backgroundColor: Orange[500],

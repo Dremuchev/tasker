@@ -66,6 +66,8 @@ export const HeaderTabs = withRouter(({ history, location, tabs }: RouteComponen
                 indicatorColor="secondary"
                 action={updateIndicator}
                 centered
+                variant="scrollable"
+                scrollButtons="auto"
             >
                 {tabs && tabs.map(renderTabs)}
             </CustomTabs>
