@@ -3,8 +3,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     devServer: {
-        port: 9000,
-        https: false,
+        port: 3000,
+        https: true,
         historyApiFallback: true,
         contentBase: path.join(__dirname, '/../dist'),
         host: 'localhost',

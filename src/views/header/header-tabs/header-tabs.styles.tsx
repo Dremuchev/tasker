@@ -7,6 +7,8 @@ import styled from 'styled-components';
 import { HEADER_TABS_HEIGHT, INFO_HEADER_HEIGHT, Orange, PrimaryColors } from '../../../constants';
 import { CustomTabProps, CustomTabsProps } from './header-tabs.types';
 
+const HEADER_WIDTH = 'calc(100vw - 17px)';
+
 export const useTabsStyles = makeStyles(theme => ({
     customTabsBar: {
         top: INFO_HEADER_HEIGHT,
@@ -15,6 +17,9 @@ export const useTabsStyles = makeStyles(theme => ({
     toolbar: {
         '&&': {
             minHeight: HEADER_TABS_HEIGHT,
+            justifyContent: 'flex-end',
+            width: HEADER_WIDTH,
+            padding: 0,
         },
     },
     logoText: {
@@ -26,6 +31,7 @@ export const useTabsStyles = makeStyles(theme => ({
     },
     logoIcon: {
         color: Orange[600],
+        paddingRight: 4,
     },
 }));
 
@@ -33,10 +39,13 @@ export const CustomTabs = withStyles((theme: Theme) =>
     createStyles({
         root: {
             minHeight: HEADER_TABS_HEIGHT,
-            width: 'calc(100vw - 17px)',
+            width: HEADER_WIDTH,
         },
         indicator: {
-            backgroundColor: Orange[500],
+            backgroundColor: 'transparent',
+        },
+        flexContainer: {
+            justifyContent: 'flex-end',
         },
     }),
 )((props: CustomTabsProps) => <Tabs {...props} />);
@@ -50,11 +59,18 @@ export const CustomTab = withStyles((theme: Theme) =>
             fontSize: '0.85rem',
             color: PrimaryColors[600],
             minHeight: HEADER_TABS_HEIGHT,
+            minWidth: 'auto',
             '&:focus, &:hover': {
                 color: PrimaryColors[700],
             },
             '&:active': {
                 color: PrimaryColors[800],
+            },
+        },
+        selected: {
+            color: Orange[600],
+            '&:focus, &:hover': {
+                color: Orange[700],
             },
         },
     }),
@@ -70,5 +86,5 @@ export const LogoTextWrapper = styled.div`
 export const TypographyWrapper = styled<any>(Typography)`
     color: ${Orange[600]};
     text-decoration: none;
-    padding-left: 12px;
+    padding-right: 12px;
 `;

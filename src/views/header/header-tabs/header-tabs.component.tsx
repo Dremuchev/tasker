@@ -1,16 +1,20 @@
-import { SvgIcon, Toolbar, Typography } from '@material-ui/core';
+import { SvgIcon, Toolbar } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
 import BuildRounded from '@material-ui/icons/BuildRounded';
 import React, { useCallback, useEffect, useState } from 'react';
 import { RouteComponentProps, withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
 import { HistoryActions } from '../../../constants';
-import { CustomTab, CustomTabs, LogoTextWrapper, TypographyWrapper, useTabsStyles } from './header-tabs.styles';
+import { CustomTab, CustomTabs, TypographyWrapper, useTabsStyles } from './header-tabs.styles';
 import { Tabs } from './header-tabs.types';
+import { MemorializeTelephone } from '../../common/telephone/memorialize-telephone.component';
+import { ConsultantTelephone } from '../../common/telephone/conultant-telephone.component';
 
 export interface HeaderTabsProps {
     tabs?: Tabs[];
 }
+
+const CONTACT_INFO = 'Москва, ул. Озерная д. 46, корпус 2, территория "Автокомбинат 42" с 10.00 до 21.00 без выходных';
 
 export const HeaderTabs = withRouter(({ history, location, tabs }: RouteComponentProps & HeaderTabsProps) => {
     const [value, setValue] = useState(0);
@@ -48,24 +52,20 @@ export const HeaderTabs = withRouter(({ history, location, tabs }: RouteComponen
     return (
         <AppBar className={styles.customTabsBar} color="default" elevation={0} position="absolute">
             <Toolbar className={styles.toolbar}>
-                <SvgIcon><BuildRounded className={styles.logoIcon} /></SvgIcon>
-                    <TypographyWrapper variant="h6" href="/">
+                <SvgIcon className={styles.logoIcon}><BuildRounded /></SvgIcon>
+                    <TypographyWrapper variant="h6" component="a" href="/">
                         Opel-Center
                     </TypographyWrapper>
-                    <TypographyWrapper variant="subtitle2" component="a" href="tel: +74952564787">
-                        +7 (495) 256-47-87
-                    </TypographyWrapper>
-                    <TypographyWrapper variant="subtitle2" component="a" href="tel: +79151229306">
-                        +7 (915) 122-93-06
-                    </TypographyWrapper>
+                    <MemorializeTelephone />
+                    <ConsultantTelephone />
             </Toolbar>
+            <TypographyWrapper variant="subtitle2" align="right">{CONTACT_INFO}</TypographyWrapper>
             <CustomTabs
                 onChange={handleChange}
                 value={value}
                 aria-label="tabs"
                 indicatorColor="secondary"
                 action={updateIndicator}
-                centered
                 variant="scrollable"
                 scrollButtons="auto"
             >
