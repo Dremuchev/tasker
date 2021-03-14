@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom';
 import { HistoryActions } from '../../../constants';
 import { Tabs } from '../header-tabs/header-tabs.types';
 import { BurgerHeaderWrapper, CustomListItem, useStyles } from './mobile-tabs.styles';
+import { CONFIG } from '../../../configuration';
 
 export interface HeaderTabsProps {
     tabs?: Tabs[];
@@ -18,7 +19,7 @@ export const MobileTabs = withRouter(({ history, location, tabs }: RouteComponen
     const [value, setValue] = useState(0);
     const [isOpen, setIsOpen] = useState(false);
     const styles = useStyles();
-    
+
     const initiateTab = useCallback(() => {
         if (tabs && history.action === HistoryActions.POP) {
             const findedTab = tabs.find((tab: Tabs) => tab.link === location.pathname);
@@ -35,26 +36,28 @@ export const MobileTabs = withRouter(({ history, location, tabs }: RouteComponen
         initiateTab();
     }, [location, tabs, history, value]);
 
-    const appBarClassName = useMemo(() => clsx(styles.appBar, {
-        [styles.appBarShift]: isOpen,
-    }), [isOpen]);
+    const appBarClassName = useMemo(
+        () =>
+            clsx(styles.appBar, {
+                [styles.appBarShift]: isOpen,
+            }),
+        [isOpen],
+    );
 
     const burgerIconClassName = useMemo(() => clsx(styles.menuButton, isOpen && styles.hide), [isOpen]);
 
     const handleDrawerAction = useCallback(() => setIsOpen(!isOpen), [isOpen]);
 
-    const handleItemSelect = useCallback((selectedId: number) => () => {
-        setValue(selectedId);
-    }, []);
+    const handleItemSelect = useCallback(
+        (selectedId: number) => () => {
+            setValue(selectedId);
+        },
+        [],
+    );
 
     return (
         <BurgerHeaderWrapper>
-            <AppBar
-                position="fixed"
-                className={appBarClassName}
-                color="default"
-                elevation={0}
-            >
+            <AppBar position="fixed" className={appBarClassName} color="default" elevation={0}>
                 <Toolbar>
                     <IconButton
                         disableRipple
@@ -67,7 +70,7 @@ export const MobileTabs = withRouter(({ history, location, tabs }: RouteComponen
                         <MenuIcon />
                     </IconButton>
                     <Typography variant="h6" noWrap>
-                        Opel-Center
+                        {CONFIG.APP_NAME}
                     </Typography>
                 </Toolbar>
                 <Drawer
@@ -79,16 +82,22 @@ export const MobileTabs = withRouter(({ history, location, tabs }: RouteComponen
                     }}
                 >
                     <div className={styles.drawerHeader}>
-                    <IconButton disableRipple onClick={handleDrawerAction}>
-                        <ChevronLeftIcon />
-                    </IconButton>
+                        <IconButton disableRipple onClick={handleDrawerAction}>
+                            <ChevronLeftIcon />
+                        </IconButton>
                     </div>
                     <Divider />
                     <List>
-                        {tabs?.map(({id, title, link}) => (
-                        <CustomListItem component={Link} key={id} selected={id === value} to={link} onClick={handleItemSelect(id)}>
-                            <ListItemText primary={title} primaryTypographyProps={{variant: 'subtitle2'}}/>
-                        </CustomListItem>
+                        {tabs?.map(({ id, title, link }) => (
+                            <CustomListItem
+                                component={Link}
+                                key={id}
+                                selected={id === value}
+                                to={link}
+                                onClick={handleItemSelect(id)}
+                            >
+                                <ListItemText primary={title} primaryTypographyProps={{ variant: 'subtitle2' }} />
+                            </CustomListItem>
                         ))}
                     </List>
                 </Drawer>

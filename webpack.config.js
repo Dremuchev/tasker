@@ -18,14 +18,13 @@ module.exports = {
         extensions: ['.ts', '.tsx', '.js', '.json'],
     },
     module: {
-        rules: [
-            {
+        rules: [{
                 test: /\.(ts|tsx)$/,
                 exclude: /node_modules/,
                 loader: 'babel-loader',
             },
             {
-                test: /.(jpg|jpeg|png|svg)$/,
+                test: /.(jpg|jpeg|png|svg|ico)$/,
                 use: ['file-loader'],
             },
             {

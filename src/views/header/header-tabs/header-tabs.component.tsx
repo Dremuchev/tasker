@@ -1,20 +1,17 @@
 import { SvgIcon, Toolbar } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
-import BuildRounded from '@material-ui/icons/BuildRounded';
+import EcoIcon from '@material-ui/icons/Eco';
 import React, { useCallback, useEffect, useState } from 'react';
 import { RouteComponentProps, withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
 import { HistoryActions } from '../../../constants';
-import { CustomTab, CustomTabs, TypographyWrapper, useTabsStyles } from './header-tabs.styles';
+import { CustomTab, CustomTabs, TypographyWrapper, Location, useTabsStyles } from './header-tabs.styles';
 import { Tabs } from './header-tabs.types';
-import { MemorializeTelephone } from '../../common/telephone/memorialize-telephone.component';
-import { ConsultantTelephone } from '../../common/telephone/conultant-telephone.component';
+import { CONFIG } from '../../../configuration';
 
 export interface HeaderTabsProps {
     tabs?: Tabs[];
 }
-
-const CONTACT_INFO = 'Москва, ул. Озерная д. 46, корпус 2, территория "Автокомбинат 42" с 10.00 до 21.00 без выходных';
 
 export const HeaderTabs = withRouter(({ history, location, tabs }: RouteComponentProps & HeaderTabsProps) => {
     const [value, setValue] = useState(0);
@@ -50,16 +47,18 @@ export const HeaderTabs = withRouter(({ history, location, tabs }: RouteComponen
     };
 
     return (
-        <AppBar className={styles.customTabsBar} color="default" elevation={0} position="absolute">
+        <AppBar className={styles.customTabsBar} color="default" elevation={0} position="fixed">
             <Toolbar className={styles.toolbar}>
-                <SvgIcon className={styles.logoIcon}><BuildRounded /></SvgIcon>
-                    <TypographyWrapper variant="h6" component="a" href="/">
-                        Opel-Center
-                    </TypographyWrapper>
-                    <MemorializeTelephone />
-                    <ConsultantTelephone />
+                <TypographyWrapper variant="h6" component="a" href="/">
+                    <SvgIcon className={styles.logoIcon}>
+                        <EcoIcon />
+                    </SvgIcon>
+                    {CONFIG.APP_NAME}
+                </TypographyWrapper>
             </Toolbar>
-            <TypographyWrapper variant="subtitle2" align="right">{CONTACT_INFO}</TypographyWrapper>
+            <Location>
+                <TypographyWrapper variant="subtitle2">{CONFIG.CONTACT_INFO_ADDRESS}</TypographyWrapper>
+            </Location>
             <CustomTabs
                 onChange={handleChange}
                 value={value}

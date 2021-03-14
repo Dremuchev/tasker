@@ -39,3 +39,4 @@ export const Orange = {
 // sizes
 export const INFO_HEADER_HEIGHT = '0px';
 export const HEADER_TABS_HEIGHT = '42px';
+export const isMobileScreen = window.matchMedia('(max-width: 768px)').matches;

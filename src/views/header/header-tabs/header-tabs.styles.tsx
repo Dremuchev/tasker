@@ -57,14 +57,14 @@ export const CustomTab = withStyles((theme: Theme) =>
             textTransform: 'none',
             fontWeight: 600,
             fontSize: '0.85rem',
-            color: PrimaryColors[600],
+            color: Orange[500],
             minHeight: HEADER_TABS_HEIGHT,
             minWidth: 'auto',
             '&:focus, &:hover': {
-                color: PrimaryColors[700],
+                color: Orange[700],
             },
             '&:active': {
-                color: PrimaryColors[800],
+                color: Orange[800],
             },
         },
         selected: {
@@ -83,8 +83,15 @@ export const LogoTextWrapper = styled.div`
     margin: 0 12px 6px 12px;
 `;
 
-export const TypographyWrapper = styled<any>(Typography)`
+export const TypographyWrapper = styled<any>(Typography)<{ noIndent: boolean; color: string }>`
     color: ${Orange[600]};
     text-decoration: none;
-    padding-right: 12px;
+    padding-right: ${({ noIndent }) => (Boolean(noIndent) ? '0' : '12px')};
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+`;
+
+export const Location = styled.div`
+    width: ${HEADER_WIDTH};
 `;
