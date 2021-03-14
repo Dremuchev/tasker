@@ -8,7 +8,7 @@ export const Content = () => {
     return (
         <StyledMain isMobile={isMobileScreen}>
             <Switch>
-                <Route exact path="/" component={MainPage} />
+                <Route exact path="/tasker" component={MainPage} />
             </Switch>
         </StyledMain>
     );
